@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="keyword keyword keyword keyword"> 
+    <meta name="description" content="description of your site">
+    <title>Document</title>
+    <style>
+        fieldset{
+          background: linear-gradient(white,rgb(81, 78, 78));
+          width: 700px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin-top: 60px;
+          margin-left: 390px;
+          font-weight: bold;
+        }
+        legend{
+            font-weight: bold;
+            font-size: 25px;
+        }
+
+        fieldset>table{
+            font-size: 20px;
+         
+
+        }
+        #button{
+            padding: 15px;
+            border-radius: 25px;
+        }
+
+        
+
+    </style>
+</head>
+<body>
+    <fieldset>
+        <legend>Enquiry Form</legend>
+       
+           <table  cellspacing="0px" cellpadding="15px">
+            <form action="" method="post" name="submit-to-google-sheet">
+            <tr>
+               <td> <label for="name">Name</label></td>
+           <td> <input type="text" id="fname" name="Name" placeholder="Enter your name" required size="50"></td>
+            </tr>
+            <br>
+            
+           <tr>
+            <td><label for="email">Email</label></td>
+           <td> <input type="email" id="femail" name="Email" placeholder="Enter your Email id" required size="50"></td>
+           </tr>
+            <br>
+
+            <tr>
+                <td><label for="Mobile">Mobile Number</label></td>
+                <td><input type="tel" id="fmobile" name="Mobile" placeholder="Enter your mobile number" maxlength="10" size="50" required></td>
+            </tr>
+            <br>
+
+           <tr>
+           <td> <label for="Question">Ask your Question</label></td>
+           <td> <textarea name="Question" id="" cols="42" rows="10" placeholder="Enter Your Questions...." required ></textarea></td>
+           </tr>
+            <br>
+            <br>
+
+            <tr>
+                <th colspan="2"><input type="submit" name="submit" id="button"></th>
+            </tr>
+
+            <span id="Success"></span>
+        </form>
+          
+           </table>
+
+
+     
+    </fieldset>
+    <script>
+      
+  const scriptURL = 'https://script.google.com/macros/s/AKfycbypKyDIWtF8nhETImDYt-p_6uiMNBWkYZYhVhwhyJaO8QLPvjxQXLwbs0Kuts2lKJDDrw/exec'
+  const form = document.forms['submit-to-google-sheet']
+const Success=document.getElementById('Success');
+  form.addEventListener('submit', e => {
+    e.preventDefault()
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+      .then(response => console.log('Success!', response))
+      "<br>"
+      Success.innerHTML="Data Successfully Submit"
+
+      setTimeout(function()
+      {
+        Success.innerHTML="";
+      },5000)
+      form.reset();
+    })
+      .catch(error => console.error('Error!', error.message))
+
+
+    </script>
+</body>
+</html>
